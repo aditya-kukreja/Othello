@@ -1,0 +1,97 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+:root {
+   --cell-size: 80px;
+   --mark-size: calc(var(--cell-size) * .9);
+}
+
+body {
+    margin: 0;
+}
+
+.board {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(8,auto)
+}
+
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    background-color: rgb(13, 105, 36);
+    border: 1.0px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: not-allowed;
+    transition: 0.5s;
+}
+
+
+
+
+.cell.wcircle, .cell.bcircle{
+cursor: not-allowed;
+}
+
+
+.board.bcircle .cell:not(.wcircle):not(.bcircle):hover::before{
+    opacity: 0.2;
+}   
+
+
+.board.wcircle .cell:not(.wcircle):not(.bcircle):hover::before{
+    opacity: 0.2;
+}
+
+.cell.wcircle::before,
+.board.wcircle .cell:not(.wcircle):not(.bcircle):hover::before{
+    content: ' ';
+    position: absolute;
+    width: var(--mark-size);
+    height: var(--mark-size);
+    border-radius: 50%;
+    background-color: white;
+}
+
+
+
+
+.cell.bcircle::before,.board.bcircle .cell:not(.wcircle):not(.bcircle):hover::before
+{
+    content: ' ';
+    position: absolute;
+    width: var(--mark-size);
+    height: var(--mark-size);
+    background-color: black;
+    border-radius: 50%;
+}
+
+
+.cell:not(.legalmove){
+    pointer-events: none;
+}
+
+.cell.legalmove {
+    cursor:pointer;
+    opacity: 0.8;
+}
+
+body {
+ background-color: rgb(37, 31, 31);   
+}
+
+.scoreboard
+{
+    background-color: rgb(255, 255, 255);
+    width: 200px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
