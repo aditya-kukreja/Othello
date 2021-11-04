@@ -1,6 +1,7 @@
 const cellElements= document.querySelectorAll('[data-cell]')
 let circleTurn=1
-
+document.querySelector(".scorewhite").innerHTML= "White's score is: 2"
+document.querySelector(".scoreblack").innerHTML= "Black's score is: 2"
 
 const resetBoard=document.querySelector('#restartButton')
 resetBoard.addEventListener('click',resetFunction,{once:false})
@@ -42,8 +43,10 @@ function resetFunction(e)
                   
     }
   }
-
+document.querySelector(".scorewhite").innerHTML= "White's score is: 2"
+document.querySelector(".scoreblack").innerHTML= "Black's score is: 2"
 displaylegalmoves('O')
+document.body.scrollTop = document.documentElement.scrollTop = 0;
 
 }
 
