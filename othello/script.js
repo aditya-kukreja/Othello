@@ -293,7 +293,7 @@ placePiece(board2,x,y,whoseTurn)
 
 function minimaxValue(board2,originalTurn,currentTurn,searchDepth)
 {
-if (isGameOver(board2) || (searchDepth == 6) ) 
+if (isGameOver(board2) || (searchDepth == 5) ) 
 {
 return heuristic(board2, originalTurn);
 }
