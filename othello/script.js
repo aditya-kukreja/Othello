@@ -20,6 +20,9 @@ board[3][4] = 'O';
 board[4][3] = 'O';
 board[4][4] = 'X';
 
+
+
+
 function resetFunction(e)
 {
   for (let i = 0; i < 8; i++)
@@ -42,6 +45,9 @@ function resetFunction(e)
                   document.getElementById(ide).classList.add("bcircle");
                   
     }
+    let winningDiv =document.querySelector("#winningMessage")
+    winningDiv.classList.remove("show")
+
   }
 document.querySelector(".scorewhite").innerHTML= "White's score is: 2"
 document.querySelector(".scoreblack").innerHTML= "Black's score is: 2"
@@ -119,7 +125,7 @@ function handleClick(e)
    
    document.querySelector(".scorewhite").innerHTML= `White's score is: ${scoreboard(board,'X')}` 
    document.querySelector(".scoreblack").innerHTML= `Black's score is: ${scoreboard(board,'O')}`
-  
+   checkWin()
    
    displaylegalmoves('X') 
    let moveX=[]
@@ -138,41 +144,21 @@ function handleClick(e)
   document.querySelector(".scoreblack").innerHTML= `Black's score is: ${scoreboard(board,'O')}`
   displaylegalmoves('O')}
       , delayInMilliseconds);
-  
-
-  MoveList(board,moveX,moveY,numMoves,'O')
-  if(numMoves.moveCount==0)
-  {displaylegalmoves('X')
-  var delayInMilliseconds = 300; //0.3 seconds
-  setTimeout(function() {
-  AImoveGenerator(board,'X')
-  document.querySelector(".scorewhite").innerHTML= `White's score is: ${scoreboard(board,'X')}` 
-  document.querySelector(".scoreblack").innerHTML= `Black's score is: ${scoreboard(board,'O')}`
-  displaylegalmoves('O')}
-      , delayInMilliseconds);
-  }
-  MoveList(board,moveX,moveY,numMoves,'O')
-  if(numMoves.moveCount==0)
-  {displaylegalmoves('X')
-  var delayInMilliseconds = 300; //0.3 seconds
-  setTimeout(function() {
-  AImoveGenerator(board,'X')
-  document.querySelector(".scorewhite").innerHTML= `White's score is: ${scoreboard(board,'X')}` 
-  document.querySelector(".scoreblack").innerHTML= `Black's score is: ${scoreboard(board,'O')}`
-  displaylegalmoves('O')}
-      , delayInMilliseconds);
-  }
-      
+         
    }   
       
-if(isGameOver(board))
-{if(scoreboard(board,'O')>=scoreboard(board,'X')) 
-{document.querySelector(".scoreblack").innerHTML="Black wins!!!"
-document.querySelector(".scorewhite").innerHTML= "AI player is a noob"}
-else 
-{document.querySelector(".scorewhite").innerHTML="White wins!!!"
-document.querySelector(".scoreblack").innerHTML= "Hard luck black, you lost"}
-  }
+// if(isGameOver(board))
+// {if(scoreboard(board,'O')>scoreboard(board,'X')) 
+// {document.querySelector(".scoreblack").innerHTML="Black wins!!!"
+// document.querySelector(".scorewhite").innerHTML= "AI player is a noob"}
+// else if(scoreboard(board,'O')>scoreboard(board,'X')) 
+// {document.querySelector(".scorewhite").innerHTML="White wins!!!"
+// document.querySelector(".scoreblack").innerHTML= "Hard luck black, you lost"}
+// else
+// {document.querySelector(".scorewhite").innerHTML="Draw!!!"
+// document.querySelector(".scoreblack").innerHTML= ""}
+//   }
+ 
 }
 
 // while(!(isGameOver(board)))
@@ -287,13 +273,36 @@ y = bestY;
 // y=7;}
 
 placePiece(board2,x,y,whoseTurn)
+// if(isGameOver(board))
+// {if(scoreboard(board,'O')>scoreboard(board,'X')) 
+// {document.querySelector(".scoreblack").innerHTML="Black wins!!!"
+// document.querySelector(".scorewhite").innerHTML= "AI player is a noob"}
+// else if(scoreboard(board,'O')>scoreboard(board,'X')) 
+// {document.querySelector(".scorewhite").innerHTML="White wins!!!"
+// document.querySelector(".scoreblack").innerHTML= "Hard luck black, you lost"}
+// else
+// {document.querySelector(".scorewhite").innerHTML="Draw!!!"
+// document.querySelector(".scoreblack").innerHTML= ""}
+//   }
+
+checkWin()
+var delayInMilliseconds = 300; //0.3 seconds
+MoveList(board,moveX,moveY,numMoves,'X')
+if(numMoves.moveCount==0)
+{setTimeout(function() {
+  AImoveGenerator(board,'X')
+  document.querySelector(".scorewhite").innerHTML= `White's score is: ${scoreboard(board,'X')}` 
+  document.querySelector(".scoreblack").innerHTML= `Black's score is: ${scoreboard(board,'O')}`
+  displaylegalmoves('O')}
+      , delayInMilliseconds);
+}
 }
 }
 
 
 function minimaxValue(board2,originalTurn,currentTurn,searchDepth)
 {
-if (isGameOver(board2) || (searchDepth == 5) ) 
+if (isGameOver(board2) || (searchDepth == 1) ) 
 {
 return heuristic(board2, originalTurn);
 }
@@ -585,4 +594,15 @@ function flipPieces(board2,x,y,deltaX,deltaY,myPiece,opponentPiece)
  let opponentScore = score(board2, opponent);
  return (ourScore - opponentScore);
  }
-
+function checkWin(){
+let winningDiv =document.querySelector("#winningMessage")
+let winningMessage=document.querySelector('[data-winning-message-text]')
+if(isGameOver(board)){
+  winningDiv.classList.add("show")
+ if(scoreboard(board,'O')>scoreboard(board,'X'))
+ winningMessage.innerText="Black Wins!"
+ else if(scoreboard(board,'O')<scoreboard(board,'X'))
+ winningMessage.innerText="White Wins!"
+ else winningMessage.innerText="Draw!"
+}
+}
