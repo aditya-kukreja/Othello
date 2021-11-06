@@ -286,7 +286,7 @@ placePiece(board2,x,y,whoseTurn)
 //   }
 
 checkWin()
-var delayInMilliseconds = 300; //0.3 seconds
+var delayInMilliseconds = 600; //0.3 seconds
 MoveList(board,moveX,moveY,numMoves,'O')
 if(numMoves.moveCount==0)
 {setTimeout(function() {
@@ -302,7 +302,7 @@ if(numMoves.moveCount==0)
 
 function minimaxValue(board2,originalTurn,currentTurn,searchDepth)
 {
-if (isGameOver(board2) || (searchDepth == 1) ) 
+if (isGameOver(board2) || (searchDepth == 2) ) 
 {
 return heuristic(board2, originalTurn);
 }
