@@ -287,7 +287,7 @@ placePiece(board2,x,y,whoseTurn)
 
 checkWin()
 var delayInMilliseconds = 300; //0.3 seconds
-MoveList(board,moveX,moveY,numMoves,'X')
+MoveList(board,moveX,moveY,numMoves,'O')
 if(numMoves.moveCount==0)
 {setTimeout(function() {
   AImoveGenerator(board,'X')
