@@ -3,8 +3,35 @@ let circleTurn=1
 document.querySelector(".scorewhite").innerHTML= "White's score is: 2"
 document.querySelector(".scoreblack").innerHTML= "Black's score is: 2"
 
+
+
 const resetBoard=document.querySelector('#restartButton')
 resetBoard.addEventListener('click',resetFunction,{once:false})
+
+
+
+
+var sound1 = new Audio();         
+sound1.src = "blackpiece.mp3";  
+sound1.oncanplaythrough = function(){  
+    sound1.readyToRock = true;    
+                                 
+};
+sound1.onerror = function(){      
+    console.log("Sound file SoundFileURL.mp3 failed to load.")
+};
+
+
+var sound2 = new Audio();         
+sound2.src = "whitepiece.mp3";  
+sound2.oncanplaythrough = function(){   
+    sound2.readyToRock = true;    
+                                 
+};
+sound2.onerror = function(){      
+    console.log("Sound file SoundFileURL.mp3 failed to load.")
+};
+
 
 const board = new Array(8);
 
@@ -117,6 +144,12 @@ return total;
 
 function handleClick(e)
 {  
+  if(sound1 && sound1.readyToRock){  // check for the sound and if it has loaded
+    sound1.currentTime = 0;       // seek to the start
+    sound1.play();                // play it till it ends
+}
+
+
    const cell=e.target
    console.log(cell.id)
   
@@ -284,9 +317,12 @@ placePiece(board2,x,y,whoseTurn)
 // {document.querySelector(".scorewhite").innerHTML="Draw!!!"
 // document.querySelector(".scoreblack").innerHTML= ""}
 //   }
-
+if(sound2 && sound2.readyToRock){  // check for the sound and if it has loaded
+  sound2.currentTime = 0;       // seek to the start
+  sound2.play();                // play it till it ends
+}
 checkWin()
-var delayInMilliseconds = 600; //0.3 seconds
+var delayInMilliseconds = 300; //0.3 seconds
 MoveList(board,moveX,moveY,numMoves,'O')
 if(numMoves.moveCount==0)
 {setTimeout(function() {
@@ -302,7 +338,7 @@ if(numMoves.moveCount==0)
 
 function minimaxValue(board2,originalTurn,currentTurn,searchDepth)
 {
-if (isGameOver(board2) || (searchDepth == 2) ) 
+if (isGameOver(board2) || (searchDepth == 1) ) 
 {
 return heuristic(board2, originalTurn);
 }
@@ -605,4 +641,5 @@ if(isGameOver(board)){
  winningMessage.innerText="White Wins!"
  else winningMessage.innerText="Draw!"
 }
+
 }
