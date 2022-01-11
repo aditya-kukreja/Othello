@@ -32,6 +32,28 @@ sound2.onerror = function(){
     console.log("Sound file SoundFileURL.mp3 failed to load.")
 };
 
+var sound3 = new Audio();         
+sound3.src = "mixkit-ominous-drums-227.wav";  
+sound3.oncanplaythrough = function(){   
+    sound3.readyToRock = true;    
+                                 
+};
+sound3.onerror = function(){      
+    console.log("Sound file SoundFileURL.mp3 failed to load.")
+};
+
+var sound4 = new Audio();         
+sound4.src = "button-22.mp3";  
+sound4.oncanplaythrough = function(){   
+    sound4.readyToRock = true;    
+                                 
+};
+sound4.onerror = function(){      
+    console.log("Sound file SoundFileURL.mp3 failed to load.")
+};
+
+
+
 
 const board = new Array(8);
 
@@ -51,7 +73,10 @@ board[4][4] = 'X';
 
 
 function resetFunction(e)
-{
+{  if(sound4 && sound4.readyToRock){  // check for the sound and if it has loaded
+  sound4.currentTime = 0;       // seek to the start
+  sound4.play();                // play it till it ends
+}
   for (let i = 0; i < 8; i++)
   for (let j = 0; j < 8; j++)
   board[i][j] = '.';
@@ -634,6 +659,10 @@ function checkWin(){
 let winningDiv =document.querySelector("#winningMessage")
 let winningMessage=document.querySelector('[data-winning-message-text]')
 if(isGameOver(board)){
+  if(sound3 && sound3.readyToRock){  // check for the sound and if it has loaded
+    sound3.currentTime = 0;       // seek to the start
+    sound3.play();                // play it till it ends
+  }
   winningDiv.classList.add("show")
  if(scoreboard(board,'O')>scoreboard(board,'X'))
  winningMessage.innerText="Black Wins!"
