@@ -12,17 +12,18 @@ body {
 }
 
 .board {
+    
     width: 100vw;
-    height: 80vh;
+    height: 70vh;
     display: grid;
     justify-content: center;
     align-content: center;
     justify-items: center;
     align-items: center;
     grid-template-columns: repeat(8,auto);
-    margin-top: 0px;
+    margin-top: 25px;
     position:relative;
-    top: -40px;
+    top: -20px;
 }
 
 .cell {
@@ -85,11 +86,12 @@ cursor: not-allowed;
 
 .cell.legalmove {
     cursor:pointer;
-    opacity: 0.8;
+    opacity: 0.6;
 }
 
-body {
- background-color: rgb(169, 246, 252);   
+body { background-image: url("nicebg.jpg");     
+    background-size: cover;
+ /* background-color: rgb(169, 246, 252);    */
 }
 
 .scoreboard
